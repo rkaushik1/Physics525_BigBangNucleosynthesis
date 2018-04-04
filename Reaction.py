@@ -26,7 +26,7 @@ class Reaction:
 
     
     # Code stub to calculate the change in abundance of one species due to one step from this reaction
-    def step(self, name, temp, rho, species):
+    def calculate_dXdt_contribution(self, name, temp, rho, species):
         # Select only the species we need for calculating this reaction
         left_species = [ specie for specie in species if self.left_contain(specie) ]
         right_species = [ specie for specie in species if self.right_contain(specie) ]
@@ -37,7 +37,7 @@ class Reaction:
 
         # Use rates to calculate contributions to dX/dt
         forward_dXdt = np.product([specie.abundance/specie.mass for specie in left_species]) * forward_rate
-        backward_dXdt = np.product([specie.abundance/specie.mass for specie in left_species]) * backward_rate
+        backward_dXdt = np.product([specie.abundance/specie.mass for specie in right_species]) * backward_rate
 
         if self.left_contain(name):
             return backward_dXdt - forward_dXdt

@@ -19,6 +19,7 @@ class Species:
     # Update the value of abundance for this species
     def update_abundance(self, abundance):
         self.abundance = abundance
+        return
 
     '''
     # Walk through each reaction this species is included in and update the abundance due to each reaction
