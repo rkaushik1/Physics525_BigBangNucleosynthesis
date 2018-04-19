@@ -1,3 +1,7 @@
+ALL_SPECIES = ['p', 'n', 'D', 'He3', 'T', 'He4', 'Be7', 'Li7', 'B8', 'B10', 'C11', 'C12', 'B11', 'N12', 'N14', 'N13', 
+               'O16', 'O15', 'C13', 'F17', 'N15', 'Ne19', 'Ne20', 'Ne18', 'F19', 'Na21', 'Na22', 'Na20', 'Na21', 'Mg24', 'Mg23',
+               'Mg22', 'Mg25', 'Al25', 'Al24', 'Al26']
+
 class Species:
     
     def __init__(self, name, mass_number, initial_abundance, reactions):
