@@ -35,10 +35,10 @@ def main():
     # loads which species are in which reactions
     reactionData = pd.read_csv('ReactionData.csv')
     reactionData.lhs = [[ SpeciesEnum[s] for s in lh.split(';')] for lh in reactionData.lhs]
-    reactionData.rhs = [[ SpeciesEnum[s] for s in lh.split(';')] for lh in reactionData.rhs]
+    reactionData.rhs = [[ SpeciesEnum[s] for s in rh.split(';')] for rh in reactionData.rhs]
     
     # Use the Reaction meta data and all the rate equations in Rates.py to create the reaction objects
-    reactions = [Reaction(i, reactionData.ix[i].lhs, reactionData.ix[i].rhs, 
+    reactions = [Reaction(i+1, reactionData.ix[i].lhs, reactionData.ix[i].rhs, 
                           rates=(Rates.ALL_RATES['forward_'+str(i+1)], Rates.ALL_RATES['backward_'+str(i+1)]) 
                           ) for i in range(len(reactionData))]
 

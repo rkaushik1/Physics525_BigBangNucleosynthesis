@@ -29,6 +29,7 @@ class SpeciesEnum(Enum):
     Na21 = 25
     Na22 = 26
     Na20 = 27
+    O14 = 28
     Mg24 = 29
     Mg23 = 30
     Mg22 = 31
@@ -36,3 +37,7 @@ class SpeciesEnum(Enum):
     Al25 = 33
     Al24 = 34
     Al26 = 35
+    O17 = 36
+    F18 = 37
+    Ne21 = 38
+    Na23 = 39

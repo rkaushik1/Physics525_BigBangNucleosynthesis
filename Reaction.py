@@ -36,15 +36,16 @@ class Reaction:
         # Use parameters to calculate rates from functions
         forward_rate = self.forward(temp, rho)
         backward_rate = self.backward(temp, rho)
-
+        print(forward_rate, backward_rate, name, self.reaction_number)
+        
         # Use rates to calculate contributions to dX/dt
         forward_dXdt = np.product([specie.abundance/specie.mass for specie in left_species]) * forward_rate
         backward_dXdt = np.product([specie.abundance/specie.mass for specie in right_species]) * backward_rate
 
         if self.left_contain(name):
-            return (backward_dXdt - forward_dXdt) * sum([ specie.name == name for specie in left])
+            return (backward_dXdt - forward_dXdt) * sum([ specie.name == name for specie in self.left])
         elif self.right_contain(name):
-            return (forward_dXdt - backward_dXdt) * sum([ specie.name == name for specie in right])
+            return (forward_dXdt - backward_dXdt) * sum([ specie.name == name for specie in self.right])
         else:
             raise ValueError('Species', name, 'is not found in reaction', self) 
     

@@ -43,7 +43,7 @@ def backward_7(temp, rho):
     return 1.73 * forward_7(temp, rho) * np.exp(-37.94/temp) 
 
 def forward_8(temp, rho):
-    return 7(temp, rho)
+    return forward_7(temp,rho)
 
 def backward_8(temp, rho):
     return 1.73* forward_8(temp, rho) * np.exp(-46.80/temp)
@@ -157,7 +157,7 @@ def backward_26(temp, rho):
     return 0
 
 def forward_27(temp, rho):
-    return 1.06e5 * rho * temp**(-3./2) * np.exp(-5.7/temp) + 2.05e7 * rho * temp**(-2./3)*np.exp(-13.7*temp**(-1./3))(1 + 3.04e-2*temp**(1./3) + 1.19*temp**(2./3) + 0.254*temp)
+    return 1.06e5 * rho * temp**(-3./2) * np.exp(-5.7/temp) + 2.05e7 * rho * temp**(-2./3)*np.exp(-13.7*temp**(-1./3))*(1 + 3.04e-2*temp**(1./3) + 1.19*temp**(2./3) + 0.254*temp)
 
 def backward_27(temp, rho):
     return 2.36e10 * forward_27(temp, rho) / rho * temp**(3./2) * np.exp(-6.65/temp)
@@ -169,7 +169,7 @@ def backward_28(temp, rho):
     return 3.71 * forward_28(temp, rho) * np.exp(-33.89*temp**(-1./3))
  
 def forward_29(temp, rho):
-    return 1.06e5 * rho * temp**(-3./2) * np.exp(-4.92/temp) + 2.05e7 * rho * temp**(-2./3)*np.exp(-13.7*temp**(-1./3))(1 + 3.04e-2*temp**(1./3) + 1.19*temp**(2./3) + 0.254*temp)
+    return 1.06e5 * rho * temp**(-3./2) * np.exp(-4.92/temp) + 2.05e7 * rho * temp**(-2./3)*np.exp(-13.7*temp**(-1./3))*(1 + 3.04e-2*temp**(1./3) + 1.19*temp**(2./3) + 0.254*temp)
 
 def backward_29(temp, rho):
     return 8.87e9 * forward_29(temp, rho) / rho * temp**(3./2) * np.exp(-22.25/temp)
@@ -193,7 +193,7 @@ def backward_32(temp, rho):
     return 5.87 * forward_32(temp, rho) * np.exp(-25.72/temp)
 
 def forward_33(temp, rho):
-     return 1.34e6 * rho * temp**(-3./2) * np.exp(-5.97/temp) + 8.04e7 * rho * temp**(-2./3)*np.exp(-13.7*temp**(-1./3))(1 + 3.04*temp**(1./3) + 9.58*temp**(2./3) + 2.04*temp)
+     return 1.34e6 * rho * temp**(-3./2) * np.exp(-5.97/temp) + 8.04e7 * rho * temp**(-2./3)*np.exp(-13.7*temp**(-1./3))*(1 + 3.04*temp**(1./3) + 9.58*temp**(2./3) + 2.04*temp)
 
 def backward_33(temp, rho):
      return 1.2e10 * forward_33(temp, rho) / rho * temp**(3./2) * np.exp(-87.61/temp)

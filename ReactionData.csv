@@ -18,7 +18,7 @@ Number,lhs,rhs
 17,T;He4,Li7
 18,n;Be7,p
 19,p;Be7,B8
-20,p;Li7,He4;He4;
+20,p;Li7,He4;He4
 21,n;Be7,He4;He4
 22,p;B10,He4;Be7
 23,n;B10,He4;Li7
@@ -52,7 +52,7 @@ Number,lhs,rhs
 51,He4;Ne20,Mg24
 52,He4;Na20,p;Mg23
 53,p;Ne21,Na22
-54,He4;Ne21,n,Mg24
+54,He4;Ne21,n;Mg24
 55,p;Na21,Mg22
 56,He4;Na21,p;Mg24
 57,p;Na22,Mg23
