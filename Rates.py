@@ -70,20 +70,20 @@ def forward_12(temp, rho):
     return 1.19e10 * rho * temp**(-2./3) * np.exp(-12.25*temp**(-1./3)) * (1 + 0.0340*temp**(1./3))
 
 def backward_12(temp, rho):
-    return 3.377e-10 * forward_12(temp, rho) * rho * temp**(-3./2) * np.exp(-149.2/temp)
-
+    return 3.37e-10 * forward_12(temp, rho) * rho * temp**(-3./2) * np.exp(-149.2/temp)
+# Yuhan changed typo
 def forward_13(temp, rho):
     return 1.1e9 * rho * temp**(-2./3) * np.exp(-4.87*temp**(-1./3))* (1 + 0.0857*temp**(1./3))
 
 def backward_13(temp, rho):
-    return 3.377e-10 * forward_13(temp, rho) *rho * temp**(-3./2) * np.exp(-131.5/temp)
-
+    return 3.37e-10 * forward_13(temp, rho) *rho * temp**(-3./2) * np.exp(-131.5/temp)
+# Yuhan changed typo
 def forward_14(temp, rho):
     return 5.60e9 * rho * temp**(-2./3) * np.exp(-7.72*temp**(-1./3)) * (1 + 0.0540*temp**(1./3))
 
 def backward_14(temp, rho):
-    return 3.377e-10 * forward_14(temp, rho) *rho * temp**(-3./2) * np.exp(-140.4/temp)
-
+    return 3.37e-10 * forward_14(temp, rho) *rho * temp**(-3./2) * np.exp(-140.4/temp)
+# YUhan changed typo
 def forward_15(temp, rho):
     return 3.88e9 * rho * temp**(-2./3) * np.exp(-7.72*temp**(-1./3)) *(1 + 0.0540*temp**(1./3))
 
@@ -91,8 +91,8 @@ def backward_15(temp, rho):
     return 1.59 * forward_15(temp, rho) * np.exp(-166.2/temp)
 
 def forward_16(temp, rho):
-    return 4.8e6 * rho * temp**(-2./3) * np.exp(-12.8*temp**(-1./3)) * (1 + 0.0326*temp**(1./3) - 2.19*temp**(2./3) - 0.0499*temp + 0.0258*temp**(4./3) + 0.0150*temp**(5./3))
-
+    return 4.8e6 * rho * temp**(-2./3) * np.exp(-12.8*temp**(-1./3)) * (1 + 0.0326*temp**(1./3) - 0.219*temp**(2./3) - 0.0499*temp + 0.0258*temp**(4./3) + 0.0150*temp**(5./3))
+# Yuhan changed tupo
 def backward_16(temp, rho):
     return 1.12e10 * forward_16(temp, rho) / rho * temp**(3./2) * np.exp(-18.42/temp)
 
@@ -100,8 +100,8 @@ def forward_17(temp, rho):
     return 5.28e5 * rho * temp**(-2./3) * np.exp(-8.08*temp**(-1./3)) *(1 + 0.0516*temp**(1./3))
 
 def backward_17(temp, rho):
-    return 1.12e10 * forward_17(temp, rho) / rho * temp**(3./2) * np.exp(-18.63/temp)
-
+    return 1.12e10 * forward_17(temp, rho) / rho * temp**(3./2) * np.exp(-28.63/temp)
+# Yuhan changed typo
 def forward_18(temp, rho):
     return 6.74e9 * rho * temp
 
@@ -112,8 +112,8 @@ def forward_19(temp, rho):
     return 5.19e5 * rho * temp**(-2./3) * np.exp(-10.26*temp**(-1./3)) * (1 + 0.0407*temp**(1./3)) * (1 - np.exp(-1.564/temp))**(-1)
 
 def backward_19(temp, rho):
-    return 1.131e10 * forward_19(temp, rho) / rho * temp**(3./2) * np.exp(-1.564/temp)
-
+    return 1.31e10 * forward_19(temp, rho) / rho * temp**(3./2) * np.exp(-1.564/temp)
+# Yuhan changed typo
 def forward_20(temp, rho):
     return 1.42e9 * rho * temp**(-2./3) * np.exp(-8.47*temp**(-1./3)) * (1 + 0.0493*temp**(1./3))
 
@@ -166,8 +166,8 @@ def forward_28(temp, rho):
     return 2.2e16 * rho * temp**(-2./3) * np.exp(-31.9/temp)
 
 def backward_28(temp, rho):
-    return 3.71 * forward_28(temp, rho) * np.exp(-33.89*temp**(-1./3))
- 
+    return 3.71 * forward_28(temp, rho) * np.exp(-33.89*temp**(-1))
+ # Yuhan changed typo
 def forward_29(temp, rho):
     return 1.06e5 * rho * temp**(-3./2) * np.exp(-4.92/temp) + 2.05e7 * rho * temp**(-2./3)*np.exp(-13.7*temp**(-1./3))*(1 + 3.04e-2*temp**(1./3) + 1.19*temp**(2./3) + 0.254*temp)
 
@@ -193,8 +193,8 @@ def backward_32(temp, rho):
     return 5.87 * forward_32(temp, rho) * np.exp(-25.72/temp)
 
 def forward_33(temp, rho):
-     return 1.34e6 * rho * temp**(-3./2) * np.exp(-5.97/temp) + 8.04e7 * rho * temp**(-2./3)*np.exp(-13.7*temp**(-1./3))*(1 + 3.04*temp**(1./3) + 9.58*temp**(2./3) + 2.04*temp)
-
+     return 1.34e6 * rho * temp**(-3./2) * np.exp(-5.97/temp) + 8.04e7 * rho * temp**(-2./3)*np.exp(-13.7*temp**(-1./3))*(1 + 0.0304*temp**(1./3) + 0.958*temp**(2./3) + 0.204*temp)
+# Yuhan changed typo
 def backward_33(temp, rho):
      return 1.2e10 * forward_33(temp, rho) / rho * temp**(3./2) * np.exp(-87.61/temp)
 
