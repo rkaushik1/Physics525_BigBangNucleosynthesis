@@ -1,7 +1,5 @@
 import numpy as np
 
-#ALL_RATES = {1,}
-
 def forward_1(temp, rho):
     return 2.5e4 * rho
 
@@ -195,13 +193,13 @@ def backward_32(temp, rho):
     return 5.87 * forward_32(temp, rho) * np.exp(-25.72/temp)
 
 def forward_33(temp, rho):
-     return
+     return 1.34e6 * rho * temp**(-3./2) * np.exp(-5.97/temp) + 8.04e7 * rho * temp**(-2./3)*np.exp(-13.7*temp**(-1./3))(1 + 3.04*temp**(1./3) + 9.58*temp**(2./3) + 2.04*temp)
 
 def backward_33(temp, rho):
-     return
+     return 1.2e10 * forward_33(temp, rho) / rho * temp**(3./2) * np.exp(-87.61/temp)
 
 def forward_34(temp, rho):
-     return
+     return 
 
 def backward_34(temp, rho):
      return

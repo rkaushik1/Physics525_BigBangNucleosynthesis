@@ -30,14 +30,19 @@ def step_rk4(species, reactions, h, T, rho):
 
 def main():
     # my code here
+    
+    # Load all the meta data from ReactionData.csv
+    # loads which species are in which reactions
     reactionData = pd.read_csv('ReactionData.csv')
     reactionData.lhs = [[ SpeciesEnum[s] for s in lh.split(';')] for lh in reactionData.lhs]
     reactionData.rhs = [[ SpeciesEnum[s] for s in lh.split(';')] for lh in reactionData.rhs]
-
+    
+    # Use the Reaction meta data and all the rate equations in Rates.py to create the reaction objects
     reactions = [Reaction(i, reactionData.ix[i].lhs, reactionData.ix[i].rhs, 
                           rates=(Rates.ALL_RATES['forward_'+str(i+1)], Rates.ALL_RATES['backward_'+str(i+1)]) 
                           ) for i in range(len(reactionData))]
 
+    # Load species meta data for initial conditions
     speciesData = pd.read_csv('SpeciesData.csv')
     species = {SpeciesEnum[speciesData.ix[i]['Name']]:
                Species(SpeciesEnum[speciesData.ix[i]['Name']], speciesData.ix[i]['Mass Number'], speciesData.ix[i]['Initial Abundance'], reactions)
@@ -48,7 +53,7 @@ def main():
     print(species)
     
     step_rk4(list(species.values()), reactions, 1, 100, 100)
-    print(species)
+    print(species[SpeciesEnum['p']].abundance)
 
 if __name__ == "__main__":
     main()

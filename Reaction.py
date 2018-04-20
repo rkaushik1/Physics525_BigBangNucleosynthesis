@@ -42,9 +42,9 @@ class Reaction:
         backward_dXdt = np.product([specie.abundance/specie.mass for specie in right_species]) * backward_rate
 
         if self.left_contain(name):
-            return backward_dXdt - forward_dXdt
+            return (backward_dXdt - forward_dXdt) * sum([ specie.name == name for specie in left])
         elif self.right_contain(name):
-            return forward_dXdt - backward_dXdt
+            return (forward_dXdt - backward_dXdt) * sum([ specie.name == name for specie in right])
         else:
             raise ValueError('Species', name, 'is not found in reaction', self) 
     
