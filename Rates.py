@@ -99,70 +99,101 @@ def equation_16_backward(temp, rho):
     return 1.12e10 * equation_16_forward(temp, rho) / rho * temp**(3./2) * np.exp(-18.42/temp)
 
 def equation_17_forward(temp, rho):
-    return 5.60e9 * rho * temp**(-2./3) * np.exp(-7.72*temp**(-1./3)) *(1 + 0.0540*temp**(1./3))
+    return 5.28e5 * rho * temp**(-2./3) * np.exp(-8.08*temp**(-1./3)) *(1 + 0.0516*temp**(1./3))
 
 def equation_17_backward(temp, rho):
-    return
+    return 1.12e10 * equation_17_forward(temp, rho) / rho * temp**(3./2) * np.exp(-18.63/temp)
+
 def equation_18_forward(temp, rho):
-    return
+    return 6.74e9 * rho * temp
+
 def equation_18_backward(temp, rho):
-    return
+    return equation_18_forward(temp, rho) * np.exp(-19.07/temp)
+
 def equation_19_forward(temp, rho):
-    return
+    return 5.19e5 * rho * temp**(-2./3) * np.exp(-10.26*temp**(-1./3)) * (1 + 0.0407*temp**(1./3)) * (1 - np.exp(-1.564/temp))**(-1)
+
 def equation_19_backward(temp, rho):
-    return
+    return 1.131e10 * equation_19_forward(temp, rho) / rho * temp**(3./2) * np.exp(-1.564/temp)
+
 def equation_20_forward(temp, rho):
-    return
+    return 1.42e9 * rho * temp**(-2./3) * np.exp(-8.47*temp**(-1./3)) * (1 + 0.0493*temp**(1./3))
+
 def equation_20_backward(temp, rho):
-    return
+    return 4.64 * equation_20_forward(temp, rho) * np.exp(-201.3/temp)
+
 def equation_21_forward(temp, rho):
-    return
+    return 1.2e7 * rho * temp
+
 def equation_21_backward(temp, rho):
-    return
+    return 4.64 * equation_21_forward(temp, rho) * np.exp(-220.4/temp)
+
 def equation_22_forward(temp, rho):
-    return
+    return 1.1e11 * rho * (temp**(-2./3) * np.exp(-12.04*temp**(-1./3)) + 3.28e-2 * temp**(-3./2) * np.exp(-12.35/temp) + 5.08e-2 * temp**(-3./2) * np.exp(-16.18/temp))
+
 def equation_22_backward(temp, rho):
-    return
+    return 0.749 * equation_22_forward(temp, rho) * np.exp(-13.32/temp)
+
 def equation_23_forward(temp, rho):
-    return
+    return 5.08e12 * rho
+
 def equation_23_backward(temp, rho):
-    return
+    return 0.749 * equation_23_forward(temp, rho) * np.exp(-32.39/temp)
+
 def equation_24_forward(temp, rho):
-    return
+    return 5.7e3  *rho * temp**(-3./2) * np.exp(-6.44/temp)
+
 def equation_24_backward(temp, rho):
-    return
+    return 4.06e10 * equation_24_forward(temp, rho) / rho * temp**(3./2) * np.exp(-87.56/temp)
+
 def equation_25_forward(temp, rho):
-    return
+    return 1.8e-8 * rho**2 * temp**(-3) * (np.exp(-4.32/temp) + 30.3*np.exp(-27.4/temp)) 
+
 def equation_25_backward(temp, rho):
-    return
+    return 2.05e20 * equation_25_forward(temp, rho) * rho**(-2) * temp**3 * np.exp(-84.42/temp)
+
 def equation_26_forward(temp, rho):
-    return
+    return 3.97e5 * rho * temp**(-3./2) * (np.exp(-1.74/temp) + 1.96e4*np.exp(-7.18/temp))
+
 def equation_26_backward(temp, rho):
-    return
+    return 0
+
 def equation_27_forward(temp, rho):
-    return
+    return 1.06e5 * rho * temp**(-3./2) * np.exp(-5.7/temp) + 2.05e7 * rho * temp**(-2./3)*np.exp(-13.7*temp**(-1./3))(1 + 3.04e-2*temp**(1./3) + 1.19*temp**(2./3) + 0.254*temp)
+
 def equation_27_backward(temp, rho):
-    return
+    return 2.36e10 * equation_27_forward(temp, rho) / rho * temp**(3./2) * np.exp(-6.65/temp)
+
 def equation_28_forward(temp, rho):
-    return
+    return 2.2e16 * rho * temp**(-2./3) * np.exp(-31.9/temp)
+
 def equation_28_backward(temp, rho):
-    return
+    return 3.71 * equation_28_forward(temp, rho) * np.exp(-33.89*temp**(-1./3)
+ 
 def equation_29_forward(temp, rho):
-    return
+    return 1.06e5 * rho * temp**(-3./2) * np.exp(-4.92/temp) + 2.05e7 * rho * temp**(-2./3)*np.exp(-13.7*temp**(-1./3))(1 + 3.04e-2*temp**(1./3) + 1.19*temp**(2./3) + 0.254*temp)
+
 def equation_29_backward(temp, rho):
-    return
+    return 8.87e9 * equation_29_forward(temp, rho) / rho * temp**(3./2) * np.exp(-22.25/temp)
+
 def equation_30_forward(temp, rho):
-    return
+    return 2.34e8 * rho * temp**(-2) * np.exp(-32.2*temp**(-1./3))
+
 def equation_30_backward(temp, rho):
-    return
+    return 5.2e10 * equation_30_forward(temp, rho) / rho * temp**(3./2) * np.exp(-83.11/temp)
+
 def equation_31_forward(temp, rho):
-    return
+    return 1.2e17 * rho * temp**(-2./3) * np.exp(-35.6*temp**(-1./3))
+
 def equation_31_backward(temp, rho):
-    return
+    return 4.29 * equation_31_forward(temp, rho) * np.exp(-111.9/temp)
+
 def equation_32_forward(temp, rho):
-    return
+    return 1.2e16 * rho * temp**(-2./3) * np.exp(-32.3*temp**(-1./3))
+
 def equation_32_backward(temp, rho):
-    return
+    return 5.87 * equation_32_forward(temp, rho) * np.exp(-25.72/temp)
+
 def equation_33_forward(temp, rho):
     return
 def equation_33_backward(temp, rho):
@@ -279,4 +310,11 @@ def equation_61_forward(temp, rho):
     return
 def equation_61_backward(temp, rho):
     return
-
+def equation_62_forward(temp, rho):
+    return
+def equation_62_backward(temp, rho):
+    return
+def equation_63_forward(temp, rho):
+    return
+def equation_63_backward(temp, rho):
+    return
