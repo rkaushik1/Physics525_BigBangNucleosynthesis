@@ -1,6 +1,8 @@
-ALL_SPECIES = ['p', 'n', 'D', 'He3', 'T', 'He4', 'Be7', 'Li7', 'B8', 'B10', 'C11', 'C12', 'B11', 'N12', 'N14', 'N13', 
-               'O16', 'O15', 'C13', 'F17', 'N15', 'Ne19', 'Ne20', 'Ne18', 'F19', 'Na21', 'Na22', 'Na20', 'Na21', 'Mg24', 'Mg23',
-               'Mg22', 'Mg25', 'Al25', 'Al24', 'Al26']
+#ALL_SPECIES = ['p', 'n', 'D', 'He3', 'T', 'He4', 'Be7', 'Li7', 'B8', 'B10', 'C11', 'C12', 'B11', 'N12', 'N14', 'N13', 
+#               'O16', 'O15', 'C13', 'F17', 'N15', 'Ne19', 'Ne20', 'Ne18', 'F19', 'Na21', 'Na22', 'Na20', 'Na21', 'Mg24', 'Mg23',
+#               'Mg22', 'Mg25', 'Al25', 'Al24', 'Al26']
+
+from SpeciesEnum import SpeciesEnum
 
 class Species:
     
@@ -30,3 +32,4 @@ class Species:
     def step(self, temp, h, species):
         return sum([ reaction.step(self.name, temp, h) for reaction in self.reactions ])
     '''
+
