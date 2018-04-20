@@ -1,3 +1,5 @@
+import numpy as np
+
 class Reaction:
 
     def __init__(self, number, lhs, rhs, rates):
@@ -32,8 +34,8 @@ class Reaction:
         right_species = [ specie for specie in species if self.right_contain(specie) ]
         
         # Use parameters to calculate rates from functions
-        forward_rate = forward(temp, rho)
-        backward_rate = backward(temp, rho, forward_rate)
+        forward_rate = self.forward(temp, rho)
+        backward_rate = self.backward(temp, rho)
 
         # Use rates to calculate contributions to dX/dt
         forward_dXdt = np.product([specie.abundance/specie.mass for specie in left_species]) * forward_rate

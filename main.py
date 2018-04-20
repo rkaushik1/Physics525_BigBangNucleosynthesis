@@ -1,5 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+import Rates
+from Reaction import Reaction
+from Species import Species
+from SpeciesEnum import SpeciesEnum
 
 # Given all species and all reactions
 # This function should  walk through one iteration of rk4
@@ -19,12 +24,31 @@ def step_rk4(species, reactions, h, T, rho):
     species4 = [ species3[i].create_intermediate(k3[i], h) for i in range(len(species3)) ]
     k4 = np.array([ sum([ reaction.calculate_dXdt_contribution(specie.name, T + h, rho4, species4) for reaction in specie.reactions ]) for specie in species4 ])
 
-    species = [species[i].update(species[i].abundance + (h/6)*(k1[i] + 2*k2[i] + 2*k3[i] + k4[i])) for i in range(len(species))]
+    species = [species[i].update_abundance(species[i].abundance + (h/6)*(k1[i] + 2*k2[i] + 2*k3[i] + k4[i])) for i in range(len(species))]
     
     return
 
 def main():
     # my code here
+    reactionData = pd.read_csv('ReactionData.csv')
+    reactionData.lhs = [[ SpeciesEnum[s] for s in lh.split(';')] for lh in reactionData.lhs]
+    reactionData.rhs = [[ SpeciesEnum[s] for s in lh.split(';')] for lh in reactionData.rhs]
+
+    reactions = [Reaction(i, reactionData.ix[i].lhs, reactionData.ix[i].rhs, 
+                          rates=(Rates.ALL_RATES['forward_'+str(i+1)], Rates.ALL_RATES['backward_'+str(i+1)]) 
+                          ) for i in range(len(reactionData))]
+
+    speciesData = pd.read_csv('SpeciesData.csv')
+    species = {SpeciesEnum[speciesData.ix[i]['Name']]:
+               Species(SpeciesEnum[speciesData.ix[i]['Name']], speciesData.ix[i]['Mass Number'], speciesData.ix[i]['Initial Abundance'], reactions)
+                       for i in range(len(speciesData))}
+
+    print(reactions)
+    print(reactionData)
+    print(species)
+    
+    step_rk4(list(species.values()), reactions, 1, 100, 100)
+    print(species)
 
 if __name__ == "__main__":
     main()

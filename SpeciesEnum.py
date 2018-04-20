@@ -29,7 +29,6 @@ class SpeciesEnum(Enum):
     Na21 = 25
     Na22 = 26
     Na20 = 27
-    Na21 = 28
     Mg24 = 29
     Mg23 = 30
     Mg22 = 31

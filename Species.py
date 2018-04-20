@@ -3,6 +3,7 @@
 #               'Mg22', 'Mg25', 'Al25', 'Al24', 'Al26']
 
 from SpeciesEnum import SpeciesEnum
+from Reaction import Reaction
 
 class Species:
     
@@ -15,12 +16,12 @@ class Species:
         
         # List of reactions this species is a part of                                                                                                                                                             
         # Maybe an index maybe a reference
-        self.reactions = [reaction for reaction in self.reactions if reaction.contains(name) ]
+        self.reactions = [reaction for reaction in reactions if reaction.contains(name) ]
 
     # Create a new species object with an updated abundance
     # Useful for intermediate rk4 values
     def create_intermediate(self, k, h):
-        return Species(self.name, self.abundance + h*k, self.reactions)
+        return Species(self.name, self.mass, self.abundance + h*k, self.reactions)
 
     # Update the value of abundance for this species
     def update_abundance(self, abundance):
