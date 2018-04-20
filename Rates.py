@@ -25,8 +25,8 @@ def backward_4(temp, rho):
     return forward_4(temp, rho) * np.exp(-8.864 / temp)
     
 def forward_5(temp, rho):
-    return 2.87e4 * rho * temp**(-2./3) * np.exp(-3.87*temp**(-1./3)) * (1 + 0.108*temp**(1./2) + 0.466*temp**(2./3) + 0.352*temp + 0.300*temp**(4./3) + 0.576*temp**(5./3))
-
+    return 2.87e4 * rho * temp**(-2./3) * np.exp(-3.87*temp**(-1./3)) * (1 + 0.108*temp**(1./3) + 0.466*temp**(2./3) + 0.352*temp + 0.300*temp**(4./3) + 0.576*temp**(5./3))
+#Yuhan changed 5 number error 
 def backward_5(temp, rho):
     return 2.59e10 * forward_5(temp, rho) / rho * temp**(3./2) * np.exp(-229.9/temp)
 
@@ -37,8 +37,8 @@ def backward_6(temp, rho):
     return 2.6e10 * forward_6(temp, rho) / rho * temp**(3./2) * np.exp(-238.8 / temp)
 
 def forward_7(temp, rho):
-    return 3.9e8 * rho * temp**(-2./3) * np.exp(-4.26 * temp**(-1./3)) * (1 + 0.0797*temp**(1./3) + 0.642*temp**(2./3) + 0.440*temp)
-
+    return 3.9e8 * rho * temp**(-2./3) * np.exp(-4.26 * temp**(-1./3)) * (1 + 0.0979*temp**(1./3) + 0.642*temp**(2./3) + 0.440*temp)
+# Yuhan changed typo
 def backward_7(temp, rho):
     return 1.73 * forward_7(temp, rho) * np.exp(-37.94/temp) 
 
