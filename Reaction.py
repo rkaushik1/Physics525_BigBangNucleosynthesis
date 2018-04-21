@@ -30,8 +30,8 @@ class Reaction:
     # Code stub to calculate the change in abundance of one species due to one step from this reaction
     def calculate_dXdt_contribution(self, name, temp, rho, species):
         # Select only the species we need for calculating this reaction
-        left_species = [ specie for specie in species if self.left_contain(specie) ]
-        right_species = [ specie for specie in species if self.right_contain(specie) ]
+        left_species = [ specie for specie in species if self.left_contain(specie.name) ]
+        right_species = [ specie for specie in species if self.right_contain(specie.name) ]
         
         # Use parameters to calculate rates from functions
         forward_rate = self.forward(temp, rho)
@@ -41,11 +41,17 @@ class Reaction:
         # Use rates to calculate contributions to dX/dt
         forward_dXdt = np.product([specie.abundance/specie.mass for specie in left_species]) * forward_rate
         backward_dXdt = np.product([specie.abundance/specie.mass for specie in right_species]) * backward_rate
+        print(forward_rate, backward_rate, forward_dXdt, backward_dXdt, name, self.reaction_number)
+        print('left', [specie.abundance/specie.mass for specie in left_species], 'right', [specie.abundance/specie.mass for specie in right_species])
 
         if self.left_contain(name):
-            return (backward_dXdt - forward_dXdt) * sum([ specie.name == name for specie in self.left])
+            print('left', (backward_dXdt - forward_dXdt) * self.left.count(name))
+            print()
+            return (backward_dXdt - forward_dXdt) * self.left.count(name)
         elif self.right_contain(name):
-            return (forward_dXdt - backward_dXdt) * sum([ specie.name == name for specie in self.right])
+            print('right', (forward_dXdt - backward_dXdt) * self.right.count(name))
+            print()
+            return (forward_dXdt - backward_dXdt) * self.right.count(name)
         else:
             raise ValueError('Species', name, 'is not found in reaction', self) 
     

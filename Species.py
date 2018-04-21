@@ -18,14 +18,17 @@ class Species:
         # Maybe an index maybe a reference
         self.reactions = [reaction for reaction in reactions if reaction.contains(name) ]
 
+    def __str__(self):
+        return str(self.name) + ': ' + str(self.abundance)
+
     # Create a new species object with an updated abundance
     # Useful for intermediate rk4 values
     def create_intermediate(self, k, h):
-        return Species(self.name, self.mass, self.abundance + h*k, self.reactions)
+        return Species(self.name, self.mass, max(0,self.abundance + h*k), self.reactions)
 
     # Update the value of abundance for this species
     def update_abundance(self, abundance):
-        self.abundance = abundance
+        self.abundance = max(0,abundance)
         return
 
     '''

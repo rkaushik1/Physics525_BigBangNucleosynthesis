@@ -10,22 +10,43 @@ from SpeciesEnum import SpeciesEnum
 # This function should  walk through one iteration of rk4
 def step_rk4(species, reactions, h, T, rho):
     k1 = np.array([ sum([ reaction.calculate_dXdt_contribution(specie.name, T, rho, species) for reaction in specie.reactions ]) for specie in species ])
-
+    
     # Create intermediate species to have *updated* abundances
     rho2 = rho
     species2 = [ species[i].create_intermediate(k1[i]/2, h) for i in range(len(species)) ]
     k2 = np.array([ sum([ reaction.calculate_dXdt_contribution(specie.name, T + h/2, rho2, species2) for reaction in specie.reactions ]) for specie in species2 ])
-    
+    print('Species2', end=" ")
+    for _ in list(species2):
+        print(_, end=" ")
+    print()
+
+
     rho3 = rho
     species3 = [ species2[i].create_intermediate(k2[i]/2, h) for i in range(len(species2)) ]
     k3 = np.array([ sum([ reaction.calculate_dXdt_contribution(specie.name, T + h/2, rho3, species3) for reaction in specie.reactions ]) for specie in species3 ])
-    
+    print('Species3', end=' ')
+    for _ in list(species3):
+        print(_, end=" ")
+    print()
+
     rho4 = rho
     species4 = [ species3[i].create_intermediate(k3[i], h) for i in range(len(species3)) ]
     k4 = np.array([ sum([ reaction.calculate_dXdt_contribution(specie.name, T + h, rho4, species4) for reaction in specie.reactions ]) for specie in species4 ])
+    print('Species4', end=' ')
+    for _ in list(species4):
+        print(_, end=" ")
+    print()
 
-    species = [species[i].update_abundance(species[i].abundance + (h/6)*(k1[i] + 2*k2[i] + 2*k3[i] + k4[i])) for i in range(len(species))]
-    
+    print(k1, k2, k3, k4)
+
+    for i in range(len(species)):
+        species[i].update_abundance(species[i].abundance + (h/6)*(k1[i] + 2*k2[i] + 2*k3[i] + k4[i]))
+        #species = [species[i].update_abundance(species[i].abundance + (h/6)*(k1[i] + 2*k2[i] + 2*k3[i] + k4[i])) for i in range(len(species))]
+    print('Species', end=' ')
+    for _ in list(species):
+        print(_, end=" ")
+    print()
+
     return
 
 def main():
@@ -50,10 +71,15 @@ def main():
 
     print(reactions)
     print(reactionData)
-    print(species)
+    for _ in list(species.values()):
+        print(_, end=" ")
+    print()
     
-    step_rk4(list(species.values()), reactions, 1, 100, 100)
-    print(species[SpeciesEnum['p']].abundance)
+    step_rk4(list(species.values()), reactions, 1e-6, 60, 7e-6*60**3)
+    
+    for _ in list(species.values()):
+        print(_, end=" ")
+    print()
 
 if __name__ == "__main__":
     main()
