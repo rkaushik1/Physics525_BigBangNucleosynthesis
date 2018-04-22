@@ -28,7 +28,8 @@ class Species:
 
     # Update the value of abundance for this species
     def update_abundance(self, abundance):
-        self.abundance = max(0,abundance)
+        #print('updating by', abundance)
+        self.abundance = max(0,self.abundance + abundance)
         return
 
     '''
