@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import Rates
+import copy
 from Reaction import Reaction
 from Species import Species
 from SpeciesEnum import SpeciesEnum
@@ -47,8 +48,8 @@ def step_rk4(species, reactions, h, t):
 
     return
 
-def jacobian(species, reactions):
-    jacob = np.zeros((7,7))
+def jacobian(species, reactions, t):
+    jacob = np.zeros((len(species),len(species)))
 
     for i in range(len(species)):
         for j in range(len(species)):
@@ -56,10 +57,48 @@ def jacobian(species, reactions):
             species_g = species[j]
             
             for reaction in species_f.reactions:
-                if reaction.contain(species_g.name):
-                    return 0
-        
+                if reaction.contains(species_g.name):
+                    reaction_list = reaction.left + reaction.right
+                    degree = reaction_list.count(species_g.name)
+                    
+                    if degree == 1 and species_g.abundance > 0:
+                        jacob[i,j] += reaction.calculate_dXdt_contribution(species_f, t, species)/species_g.abundance
+                    elif degree == 2 and species_g.abundance > 0:
+                        jacob[i,j] += reaction.calculate_dXdt_contribution(species_f, t, species)/species_g.abundance * 2
+                    elif degree == 3 and species_g.abundance > 0:
+                        jacob[i,j] += reaction.calculate_dXdt_contribution(species_f, t, species)/species_g.abundance * 3
+    return jacob
+
+def newtons(species, reactions, t, h):
+    y_0 = np.array([copy.deepcopy(specie.abundance) for specie in species])
     
+    y_n = copy.deepcopy(y_0)
+    #species_n = [species[i].create_intermediate(y_n[i] - y_0[i],1) for i in range(len(y_n))]
+
+    g = np.array([ sum([ reaction.calculate_dXdt_contribution(specie, t, species) for reaction in specie.reactions ]) for specie in species ])
+    f = y_n - y_0 - h*g
+
+    i = 0
+    tol = np.full(len(y_n), 1e-2)
+    err = np.full(len(y_n), np.inf)
+    while(np.any((err - tol) > 0) and i < 100):
+        
+        jacob = np.linalg.inv(-h*jacobian(species, reactions, t) + np.eye(len(y_n)))
+
+        g = np.array([ sum([ reaction.calculate_dXdt_contribution(specie, t, species) for reaction in specie.reactions ]) for specie in species ])
+        f = y_n - y_0 - h*g
+        y_n -= np.dot(jacob,f)
+        for i in range(len(species)):
+                species[i].update_abundance(y_n[i]-y_0[i])
+        
+        #species_n = [species[i].create_intermediate(y_n[i] - y_0[i],1) for i in range(len(y_n))]
+        err = np.abs(f)
+        for _ in species:
+            print(_, end=" ")
+        print()
+        print(str(y_n),str(y_0), f,g,np.dot(jacob,f),'\n')
+        i += 1
+    return
 
 def main():
     # my code here
@@ -93,13 +132,13 @@ def main():
     T_end = 10
     t_end = (10.4 / T_end)**2
 
-    h = 1e-3
+    h = 1e-8
     #t_end = t_0 + 1000*h
     
     for i in np.arange(t_0, t_end, h):
         print('Current Time:', i, 'of', t_end, '\r', end='')
-        step_rk4(list(species.values()), reactions, h, t_0)
-        
+        #step_rk4(list(species.values()), reactions, h, t_0)
+        newtons(list(species.values()), reactions, t_0, h)
     print('Starting at', t_0, 'to', t_end, 'with step',h)
 
     for _ in list(species.values()):
